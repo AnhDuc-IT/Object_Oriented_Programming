@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Stack<Character> left = new Stack<>();
+        Stack<Character> right = new Stack<>();
+        for (char x : s.toCharArray()) {
+            if (x == '<') {
+                if (!left.isEmpty()) {
+                    right.push(left.pop());
+                }
+            } else if (x == '>') {
+                if (!right.isEmpty()) {
+                    left.push(right.pop());
+                }
+            } else if (x == '-') {
+                if (!left.isEmpty()) {
+                    left.pop();
+                }
+            } else {
+                left.push(x);
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        for (char x : left) {
+            res.append(x);
+        }
+        while (!right.isEmpty()) {
+            res.append(right.pop());
+        }
+        System.out.println(res.toString());
+    }
+}
